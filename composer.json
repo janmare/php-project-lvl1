@@ -1,0 +1,9 @@
+{
+    "name": "hexlet/code",
+    "require": {},
+    "description": "hexlet study project",
+    "license": "MIT",
+    "bin": [
+        "bin/brain-games"
+    ]
+}
