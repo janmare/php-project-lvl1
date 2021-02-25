@@ -6,12 +6,16 @@
     "description": "hexlet study project",
     "license": "MIT",
     "bin": [
-        "bin/brain-games"
+        "bin/brain-games",
+        "bin/brain-even"
     ],
     "autoload": {
         "files": [
             "src/Cli.php"
-        ]
+        ],
+        "psr-4": {
+            "Brain\\Games\\": "src/games"
+        }
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.5"
