@@ -23,7 +23,7 @@ class Progression extends Engine
 
             $correctAnswer = $progressionRow[$hiddenNumber];
             $progressionRow[$hiddenNumber] = '..';
-            $this->baseGame(implode(', ', $progressionRow), $correctAnswer);
+            $this->baseGame(implode(' ', $progressionRow), $correctAnswer);
             if ($this->hasWrongAnswer) {
                 break;
             }
