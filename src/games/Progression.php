@@ -1,35 +1,39 @@
 <?php
 
-namespace Brain\Games;
+namespace Brain\Games\Progression;
 
-use function cli\line;
+use function Brain\Games\Engine\baseGame;
 
-class Progression extends Engine
+/**
+ * Game
+ *
+ * @return void
+ */
+function game()
 {
-    public function calc()
-    {
-        $this->askName();
-        line('What number is missing in the progression?');
+    baseGame('What number is missing in the progression?', 'Brain\Games\Progression\getData');
+}
 
-        for ($i = 0; $i < 3; $i++) {
-            $startPoint = random_int(1, 100);
-            $step = random_int(1, 10);
-            $hiddenNumber = random_int(0, 9);
+/**
+ * Returns question and answer
+ *
+ * @return array
+ */
+function getData()
+{
+    $startPoint = random_int(1, 100);
+    $step = random_int(1, 10);
+    $hiddenNumber = random_int(0, 9);
 
-            $progressionRow = [$startPoint];
-            for ($j = 0; $j < 10; $j++) {
-                $progressionRow[] = $progressionRow[$j] + $step;
-            }
-
-            $correctAnswer = $progressionRow[$hiddenNumber];
-            $progressionRow[$hiddenNumber] = '..';
-            $this->baseGame(implode(' ', $progressionRow), $correctAnswer);
-            if ($this->hasWrongAnswer) {
-                break;
-            }
-        }
-        if (!$this->hasWrongAnswer) {
-            line("Congratulations, %s!", $this->userName);
-        }
+    $progressionRow = [$startPoint];
+    for ($j = 0; $j < 10; $j++) {
+        $progressionRow[] = $progressionRow[$j] + $step;
     }
+
+    $correctAnswer = $progressionRow[$hiddenNumber];
+    $progressionRow[$hiddenNumber] = '..';
+
+    $questionString = implode(' ', $progressionRow);
+
+    return [$questionString, $correctAnswer];
 }

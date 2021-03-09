@@ -1,32 +1,38 @@
 <?php
 
-namespace Brain\Games;
+namespace Brain\Games\Engine;
 
 use function cli\line;
 use function cli\prompt;
+use function Brain\Games\Cli\ask_name;
 
-class Engine
+/**
+ * Base game engine
+ *
+ * @param $message
+ * @param $callback
+ *
+ * @return void
+ */
+function baseGame($message, $callback)
 {
-    protected $userName;
-
-    protected $hasWrongAnswer;
-
-    public function askName()
-    {
-        line('Welcome to the Brain Game!');
-        $this->userName = prompt('May I have your name?', false, ' ');
-        line("Hello, %s!", $this->userName);
-    }
-
-    public function baseGame($questionString, $correctAnswer)
-    {
+    $userName = ask_name();
+    line($message);
+    $correct = true;
+    for ($i = 0; $i < 3; $i++) {
+        [$questionString, $correctAnswer] = call_user_func($callback);
         $userAnswer = prompt('Question: ' . $questionString, false, PHP_EOL . 'Your answer: ');
         if ($userAnswer == $correctAnswer) {
             line('Correct!');
         } else {
-            $this->hasWrongAnswer = true;
+            $correct = false;
             line("%s is wrong answer ;(. Correct answer was %s.", $userAnswer, $correctAnswer);
-            line("Let's try again, %s!", $this->userName);
+            line("Let's try again, %s!", $userName);
+            break;
         }
+    }
+
+    if ($correct) {
+        line("Congratulations, %s!", $userName);
     }
 }

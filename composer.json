@@ -15,11 +15,14 @@
     ],
     "autoload": {
         "files": [
-            "src/Cli.php"
-        ],
-        "psr-4": {
-            "Brain\\Games\\": "src/games"
-        }
+            "src/Cli.php",
+            "src/games/Calc.php",
+            "src/games/Engine.php",
+            "src/games/Even.php",
+            "src/games/Gcd.php",
+            "src/games/Prime.php",
+            "src/games/Progression.php"
+        ]
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^3.5"

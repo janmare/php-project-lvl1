@@ -1,25 +1,28 @@
 <?php
 
-namespace Brain\Games;
+namespace Brain\Games\Even;
 
-use function cli\line;
+use function Brain\Games\Engine\baseGame;
 
-class Even extends Engine
+/**
+ * Game
+ *
+ * @return void
+ */
+function game()
 {
-    public function askEven()
-    {
-        $this->askName();
-        line('Answer "yes" if the number is even, otherwise answer "no".');
-        for ($i = 0; $i < 3; $i++) {
-            $randomInt = random_int(1, 20);
-            $isEven = $randomInt % 2 === 0 ? 'yes' : 'no';
-            $this->baseGame($randomInt, $isEven);
-            if ($this->hasWrongAnswer) {
-                break;
-            }
-        }
-        if (!$this->hasWrongAnswer) {
-            line("Congratulations, %s!", $this->userName);
-        }
-    }
+    baseGame('Answer "yes" if the number is even, otherwise answer "no".', 'Brain\Games\Even\getData');
+}
+
+/**
+ * Returns question and answer
+ *
+ * @return array
+ */
+function getData()
+{
+    $randomInt = random_int(1, 20);
+    $isEven = $randomInt % 2 === 0 ? 'yes' : 'no';
+
+    return [$randomInt, $isEven];
 }

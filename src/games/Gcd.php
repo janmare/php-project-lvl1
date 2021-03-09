@@ -1,33 +1,43 @@
 <?php
 
-namespace Brain\Games;
+namespace Brain\Games\Gcd;
 
-use function cli\line;
+use function Brain\Games\Engine\baseGame;
 
-class Gcd extends Engine
+/**
+ * Game
+ *
+ * @return void
+ */
+function game()
 {
-    public function calc()
-    {
-        $this->askName();
-        line('Find the greatest common divisor of given numbers.');
+    baseGame('Find the greatest common divisor of given numbers.', 'Brain\Games\Gcd\getData');
+}
 
-        for ($i = 0; $i < 3; $i++) {
-            $number1 = random_int(1, 100);
-            $number2 = random_int(1, 100);
+/**
+ * Returns question and answer
+ *
+ * @return array
+ */
+function getData()
+{
+    $number1 = random_int(1, 100);
+    $number2 = random_int(1, 100);
 
-            $this->baseGame($number1 . ' ' . $number2, $this->gcd($number1, $number2));
-            if ($this->hasWrongAnswer) {
-                break;
-            }
-        }
-        if (!$this->hasWrongAnswer) {
-            line("Congratulations, %s!", $this->userName);
-        }
-    }
+    $gcd = gcd($number1, $number2);
+    return [$number1 . ' ' . $number2, $gcd];
+}
 
-    public function gcd($a, $b)
-    {
-        $result = ($a % $b) ? $this->gcd($b, $a % $b) : $b;
-        return $result;
-    }
+/**
+ * Gets gcd
+ *
+ * @param $a
+ * @param $b
+ *
+ * @return mixed
+ */
+function gcd($a, $b)
+{
+    $result = ($a % $b) ? gcd($b, $a % $b) : $b;
+    return $result;
 }

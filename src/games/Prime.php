@@ -1,39 +1,47 @@
 <?php
 
-namespace Brain\Games;
+namespace Brain\Games\Prime;
 
-use function cli\line;
+use function Brain\Games\Engine\baseGame;
 
-class Prime extends Engine
+/**
+ * Game
+ *
+ * @return void
+ */
+function game()
 {
-    public function calc()
-    {
-        $this->askName();
-        line('Answer "yes" if given number is prime. Otherwise answer "no".');
+    baseGame('Answer "yes" if given number is prime. Otherwise answer "no".', 'Brain\Games\Prime\getData');
+}
 
-        for ($i = 0; $i < 3; $i++) {
-            $randomInt = random_int(1, 100);
-            $isPrime = $this->isPrime($randomInt) ? 'yes' : 'no';
-            $this->baseGame($randomInt, $isPrime);
-            if ($this->hasWrongAnswer) {
-                break;
-            }
-        }
-        if (!$this->hasWrongAnswer) {
-            line("Congratulations, %s!", $this->userName);
+/**
+ * Returns question and answer
+ *
+ * @return array
+ */
+function getData()
+{
+    $randomInt = random_int(1, 100);
+    $isPrime = isPrime($randomInt) ? 'yes' : 'no';
+
+    return [$randomInt, $isPrime];
+}
+
+/**
+ * Checks is number is prime
+ *
+ * @param $num
+ * @return bool
+ */
+function isPrime($num)
+{
+    $bCheck = true;
+    $highestIntegralSquareRoot = floor(sqrt($num));
+    for ($i = 2; $i <= $highestIntegralSquareRoot; $i++) {
+        if ($num % $i == 0) {
+            $bCheck = false;
+            break;
         }
     }
-
-    private function isPrime($num)
-    {
-        $bCheck = true;
-        $highestIntegralSquareRoot = floor(sqrt($num));
-        for ($i = 2; $i <= $highestIntegralSquareRoot; $i++) {
-            if ($num % $i == 0) {
-                $bCheck = false;
-                break;
-            }
-        }
-        return $bCheck;
-    }
+    return $bCheck;
 }

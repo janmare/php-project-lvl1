@@ -1,44 +1,44 @@
 <?php
 
-namespace Brain\Games;
+namespace Brain\Games\Calc;
 
-use function cli\line;
+use function Brain\Games\Engine\baseGame;
 
-class Calc extends Engine
+/**
+ * Game
+ *
+ * @return void
+ */
+function game()
 {
-    public function calc()
-    {
-        $this->askName();
-        line('What is the result of the expression?');
+    baseGame('What is the result of the expression?', 'Brain\Games\Calc\getData');
+}
 
-        $operations = ['+', '-', '*'];
+/**
+ * Returns question and answer
+ *
+ * @return array
+ */
+function getData()
+{
+    $operationTypes = ['+', '-', '*'];
+    $number1 = random_int(1, 20);
+    $number2 = random_int(1, 20);
+    $operator = $operationTypes[random_int(0, 2)];
 
-        for ($i = 0; $i < 3; $i++) {
-            $number1 = random_int(1, 20);
-            $number2 = random_int(1, 20);
-            $operator = $operations[random_int(0, 2)];
-
-            $expression = $number1 . ' ' . $operator . ' ' . $number2;
-
-            switch ($operator) {
-                case '+':
-                    $resultExpression = $number1 + $number2;
-                    break;
-                case '-':
-                    $resultExpression = $number1 - $number2;
-                    break;
-                case '*':
-                    $resultExpression = $number1 * $number2;
-                    break;
-            }
-
-            $this->baseGame($expression, $resultExpression);
-            if ($this->hasWrongAnswer) {
-                break;
-            }
-        }
-        if (!$this->hasWrongAnswer) {
-            line("Congratulations, %s!", $this->userName);
-        }
+    $expression = $number1 . ' ' . $operator . ' ' . $number2;
+    switch ($operator) {
+        case '-':
+            $resultExpression = $number1 - $number2;
+            break;
+        case '*':
+            $resultExpression = $number1 * $number2;
+            break;
+        case '+':
+        default:
+            $resultExpression = $number1 + $number2;
+            break;
     }
+
+    return [$expression, $resultExpression];
 }
