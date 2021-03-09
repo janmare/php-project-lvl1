@@ -13,7 +13,7 @@ class Prime extends Engine
 
         for ($i = 0; $i < 3; $i++) {
             $randomInt = random_int(1, 100);
-            $isPrime = gmp_prob_prime($randomInt) ? 'yes' : 'no';
+            $isPrime = $this->isPrime($randomInt) ? 'yes' : 'no';
             $this->baseGame($randomInt, $isPrime);
             if ($this->hasWrongAnswer) {
                 break;
@@ -22,5 +22,18 @@ class Prime extends Engine
         if (!$this->hasWrongAnswer) {
             line("Congratulations, %s!", $this->userName);
         }
+    }
+
+    private function isPrime($num)
+    {
+        $bCheck = true;
+        $highestIntegralSquareRoot = floor(sqrt($num));
+        for ($i = 2; $i <= $highestIntegralSquareRoot; $i++) {
+            if ($num % $i == 0) {
+                $bCheck = false;
+                break;
+            }
+        }
+        return $bCheck;
     }
 }
