@@ -1,7 +1,8 @@
 {
     "name": "hexlet/code",
     "require": {
-        "wp-cli/php-cli-tools": "^0.11.11"
+        "wp-cli/php-cli-tools": "^0.11.11",
+        "ext-gmp": "*"
     },
     "description": "hexlet study project",
     "license": "MIT",
@@ -10,7 +11,8 @@
         "bin/brain-even",
         "bin/brain-calc",
         "bin/brain-gcd",
-        "bin/brain-progression"
+        "bin/brain-progression",
+        "bin/brain-prime"
     ],
     "autoload": {
         "files": [
