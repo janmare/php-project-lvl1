@@ -3,7 +3,6 @@
 namespace Brain\Games;
 
 use function cli\line;
-use function cli\prompt;
 
 class Calc extends Engine
 {
