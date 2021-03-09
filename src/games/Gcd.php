@@ -25,8 +25,9 @@ class Gcd extends Engine
         }
     }
 
-    public function gcd($a, $b) {
-        $result = ($a % $b) ? $this->gcd($b,$a % $b) : $b;
+    public function gcd($a, $b)
+    {
+        $result = ($a % $b) ? $this->gcd($b, $a % $b) : $b;
         return $result;
     }
 }
