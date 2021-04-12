@@ -10,11 +10,11 @@ use function Brain\Games\Cli\ask_name;
  * Base game engine
  *
  * @param string $message  Message.
- * @param string $callback Callback.
+ * @param callable():mixed $callback Callback.
  *
  * @return void
  */
-function baseGame(string $message, string $callback)
+function baseGame(string $message, $callback)
 {
     $userName = ask_name();
     line($message);

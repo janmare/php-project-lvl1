@@ -43,7 +43,7 @@ function getData()
  */
 function gcd(int $a, int $b)
 {
-    if ($a % $b) {
+    if ($a % $b == true) {
         $result = gcd($b, ($a % $b));
     } else {
         $result = $b;
