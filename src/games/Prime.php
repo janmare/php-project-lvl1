@@ -30,10 +30,10 @@ function getData()
 /**
  * Checks is number is prime
  *
- * @param $num
+ * @param  integer $num Num.
  * @return bool
  */
-function isPrime($num)
+function isPrime(int $num)
 {
     $bCheck = true;
     $highestIntegralSquareRoot = floor(sqrt($num));

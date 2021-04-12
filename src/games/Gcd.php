@@ -4,6 +4,7 @@ namespace Brain\Games\Gcd;
 
 use function Brain\Games\Engine\baseGame;
 
+
 /**
  * Game
  *
@@ -13,6 +14,7 @@ function game()
 {
     baseGame('Find the greatest common divisor of given numbers.', 'Brain\Games\Gcd\getData');
 }
+
 
 /**
  * Returns question and answer
@@ -25,19 +27,27 @@ function getData()
     $number2 = random_int(1, 100);
 
     $gcd = gcd($number1, $number2);
-    return [$number1 . ' ' . $number2, $gcd];
+    return [
+        $number1.' '.$number2,
+        $gcd,
+    ];
 }
+
 
 /**
  * Gets gcd
  *
- * @param $a
- * @param $b
+ * @param integer $a First num.
+ * @param integer $b Second num.
  *
  * @return mixed
  */
-function gcd($a, $b)
+function gcd(int $a, int $b)
 {
-    $result = ($a % $b) ? gcd($b, $a % $b) : $b;
+    if ($a % $b) {
+        $result = gcd($b, ($a % $b));
+    } else {
+        $result = $b;
+    }
     return $result;
 }

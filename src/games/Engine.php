@@ -9,19 +9,19 @@ use function Brain\Games\Cli\ask_name;
 /**
  * Base game engine
  *
- * @param $message
- * @param $callback
+ * @param string $message  Message.
+ * @param string $callback Callback.
  *
  * @return void
  */
-function baseGame($message, $callback)
+function baseGame(string $message, string $callback)
 {
     $userName = ask_name();
     line($message);
     $correct = true;
     for ($i = 0; $i < 3; $i++) {
         [$questionString, $correctAnswer] = call_user_func($callback);
-        $userAnswer = prompt('Question: ' . $questionString, false, PHP_EOL . 'Your answer: ');
+        $userAnswer = prompt('Question: ' . $questionString, '', PHP_EOL . 'Your answer: ');
         if ($userAnswer == $correctAnswer) {
             line('Correct!');
         } else {

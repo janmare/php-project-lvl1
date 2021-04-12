@@ -11,7 +11,7 @@ use function cli\prompt;
 function ask_name()
 {
     line('Welcome to the Brain Game!');
-    $userName = prompt('May I have your name?', false, ' ');
+    $userName = prompt('May I have your name?', '', ' ');
     line("Hello, %s!", $userName);
 
     return $userName;
