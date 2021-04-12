@@ -4,7 +4,6 @@ namespace Brain\Games\Gcd;
 
 use function Brain\Games\Engine\baseGame;
 
-
 /**
  * Game
  *
@@ -28,7 +27,7 @@ function getData()
 
     $gcd = gcd($number1, $number2);
     return [
-        $number1.' '.$number2,
+        $number1 . ' ' . $number2,
         $gcd,
     ];
 }
